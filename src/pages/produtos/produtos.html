@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <ion-buttons start left>
+      <button ion-button (click)="voltarPagina()" style="color:black !important;">
+        <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Cadastro de Produto</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="localForm" (submit)="salvarProduto()" novalidate>
+    <ion-row padding>
+      <ion-item>
+        <ion-label floating>Nome</ion-label>
+        <ion-input #nome formControlName="nome" type="text" [class.invalid]="!localForm.controls.nome.valid && localForm.controls.nome.dirty"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="!localForm.controls.nome.valid  && localForm.controls.nome.dirty">
+        <p>Informe um Nome</p>
+      </ion-item>
+      </ion-row>
+
+    <ion-row padding>
+      <ion-item>
+        <ion-label floating>Valor</ion-label>
+        <ion-input #local formControlName="valor" type="number" [class.invalid]="!localForm.controls.valor.valid && localForm.controls.valor.dirty"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="!localForm.controls.valor.valid  && localForm.controls.valor.dirty">
+        <p>Preencha o valor</p>
+      </ion-item>
+    </ion-row>
+    <ion-row padding>
+      <button block type="submit" ion-button large>
+        <ion-icon ios="ios-log-in" md="md-log-in" style="font-size:34px;padding-right:10px;"></ion-icon> Cadastrar Produto</button>
+    </ion-row>
+    <ion-row padding>
+      <ion-list *ngFor="let produto of produtos">
+        <ion-col>
+        {{ produto.payload.val().nome }}    
+        </ion-col>
+      </ion-list>
+    </ion-row>
+  </form>
+
+
+</ion-content>
